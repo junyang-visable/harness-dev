@@ -1,3 +1,6 @@
 [submodule "projects/v-ai-platform-backend"]
 	path = projects/v-ai-platform-backend
 	url = https://github.com/visable-dev/v-ai-platform-backend.git
+[submodule "projects/v-ai-frontend"]
+	path = projects/v-ai-frontend
+	url = https://github.com/visable-dev/v-ai-frontend.git
