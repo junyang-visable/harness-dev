@@ -7,3 +7,6 @@
 [submodule "projects/v-ai-platform-iac"]
 	path = projects/v-ai-platform-iac
 	url = https://github.com/visable-dev/v-ai-platform-iac.git
+[submodule "projects/v-ai-platform"]
+	path = projects/v-ai-platform
+	url = https://github.com/visable-dev/v-ai-platform.git
