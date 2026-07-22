@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Append one business-change entry to a repository-specific progress file.
+# Prepend one business-change entry to a repository-specific progress file.
 
 set -euo pipefail
 
@@ -60,10 +60,22 @@ if [[ ! -f "$PROGRESS_FILE" ]]; then
   printf '# %s Progress\n' "$REPO" > "$PROGRESS_FILE"
 fi
 
+ENTRY_FILE=$(mktemp)
+TEMP_FILE=$(mktemp)
+trap 'rm -f "$ENTRY_FILE" "$TEMP_FILE"' EXIT
+
 {
   printf '\n## %s — %s — %s\n' "$(date '+%Y-%m-%d')" "$REPO" "$COMMIT"
   printf '%s\n' "- category: $CATEGORY"
   printf '%s\n' "$BODY"
-} >> "$PROGRESS_FILE"
+} > "$ENTRY_FILE"
 
-echo "✅ 已追加 progress 业务记录: $REPO@$COMMIT"
+{
+  IFS= read -r HEADER || true
+  printf '%s\n' "$HEADER"
+  cat "$ENTRY_FILE"
+  tail -n +2 "$PROGRESS_FILE"
+} < "$PROGRESS_FILE" > "$TEMP_FILE"
+mv "$TEMP_FILE" "$PROGRESS_FILE"
+
+echo "✅ 已更新 progress 业务记录（最新记录置顶）: $REPO@$COMMIT"

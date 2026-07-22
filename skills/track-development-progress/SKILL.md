@@ -5,7 +5,7 @@ description: Record business-facing and technical changes for each repository af
 
 # Track Development Progress
 
-记录开发任务完成后的业务功能变化，并按仓库保存到根仓库 `.progress/<仓库名>.md`。
+记录开发任务完成后的业务功能变化，并按仓库保存到根仓库 `.progress/<仓库名>.md`，最新记录始终置于文档上方。
 
 ## Workflow
 
@@ -17,7 +17,7 @@ description: Record business-facing and technical changes for each repository af
    - `风险与后续`: known gaps, compatibility concerns, follow-up work, or `无`.
 3. Keep the entry factual. Separate implemented behavior from planned behavior, and mention mock-only or partially implemented behavior explicitly.
 4. After creating a commit, inspect `git branch --show-current` and `git rev-parse --abbrev-ref '@{upstream}'` in that repository. Push the commit to its configured upstream with ordinary `git push`; never use `--force` or push an unresolved branch target. If no upstream is configured, stop and report the missing remote/branch instead of guessing.
-5. Append the entry with the bundled helper script. The script creates or updates one Markdown file per repository under the ignored `.progress/` directory:
+5. Prepend the entry with the bundled helper script. The script creates or updates one Markdown file per repository under the ignored `.progress/` directory, immediately below the repository heading:
 
    ```bash
    printf '%s\n' '- 功能变化：...' '- 技术变化：...' '- 验证结果：...' '- 风险与后续：...' \\
@@ -49,8 +49,8 @@ Use one entry per repository and commit. Keep each entry short enough to scan in
 - 风险与后续：...
 ```
 
-Each repository file starts with a repository heading, for example `.progress/v-ai-platform.md`, followed by its chronological entries. Do not create a `.progress` file, `.progress.prev`, or `.progress-log.md`; `.progress` is a directory.
+Each repository file starts with a repository heading, for example `.progress/v-ai-platform.md`, followed by entries ordered newest first. Do not create a `.progress` file, `.progress.prev`, or `.progress-log.md`; `.progress` is a directory.
 
 ## Resources
 
-Use [scripts/append-progress-entry.sh](scripts/append-progress-entry.sh) to append entries consistently and avoid duplicate records for the same repository/commit.
+Use [scripts/append-progress-entry.sh](scripts/append-progress-entry.sh) to prepend entries consistently and avoid duplicate records for the same repository/commit.
