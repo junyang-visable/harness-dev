@@ -16,7 +16,8 @@ description: Record business-facing and technical changes for each repository af
    - `验证结果`: tests, lint, typecheck, manual checks, or explicit not-run reason.
    - `风险与后续`: known gaps, compatibility concerns, follow-up work, or `无`.
 3. Keep the entry factual. Separate implemented behavior from planned behavior, and mention mock-only or partially implemented behavior explicitly.
-4. Append the entry with the bundled helper script. The script creates or updates one Markdown file per repository under the ignored `.progress/` directory:
+4. After creating a commit, inspect `git branch --show-current` and `git rev-parse --abbrev-ref '@{upstream}'` in that repository. Push the commit to its configured upstream with ordinary `git push`; never use `--force` or push an unresolved branch target. If no upstream is configured, stop and report the missing remote/branch instead of guessing.
+5. Append the entry with the bundled helper script. The script creates or updates one Markdown file per repository under the ignored `.progress/` directory:
 
    ```bash
    printf '%s\n' '- 功能变化：...' '- 技术变化：...' '- 验证结果：...' '- 风险与后续：...' \\
@@ -24,8 +25,8 @@ description: Record business-facing and technical changes for each repository af
          --repo '<repository-name>' --commit '<commit-sha>' --category '<feature|fix|refactor|config|docs>'
    ```
 
-5. Run `./scripts/progress.sh` from the harness root. It refreshes and displays the current repository status and lists the per-repository progress files; it does not create a consolidated snapshot.
-6. Do not commit `.progress/`; it is local working state and must remain ignored by Git.
+6. Run `./scripts/progress.sh` from the harness root. It refreshes and displays the current repository status and lists the per-repository progress files; it does not create a consolidated snapshot.
+7. Do not commit `.progress/`; it is local working state and must remain ignored by Git.
 
 ## Entry quality rules
 
