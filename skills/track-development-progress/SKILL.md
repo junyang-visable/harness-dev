@@ -5,7 +5,7 @@ description: Record business-facing and technical changes for each repository af
 
 # Track Development Progress
 
-记录开发任务完成后的业务功能变化，并把结构化记录汇总到根仓库的 `.progress` 快照中。
+记录开发任务完成后的业务功能变化，并按仓库保存到根仓库 `progress/<仓库名>.md`。
 
 ## Workflow
 
@@ -16,7 +16,7 @@ description: Record business-facing and technical changes for each repository af
    - `验证结果`: tests, lint, typecheck, manual checks, or explicit not-run reason.
    - `风险与后续`: known gaps, compatibility concerns, follow-up work, or `无`.
 3. Keep the entry factual. Separate implemented behavior from planned behavior, and mention mock-only or partially implemented behavior explicitly.
-4. Append the entry with the bundled helper script:
+4. Append the entry with the bundled helper script. The script creates or updates one Markdown file per repository:
 
    ```bash
    printf '%s\n' '- 功能变化：...' '- 技术变化：...' '- 验证结果：...' '- 风险与后续：...' \\
@@ -24,8 +24,8 @@ description: Record business-facing and technical changes for each repository af
          --repo '<repository-name>' --commit '<commit-sha>' --category '<feature|fix|refactor|config|docs>'
    ```
 
-5. Run `./scripts/progress.sh` from the harness root. The generated `.progress` contains the repository snapshot followed by the accumulated business change log.
-6. Do not commit `.progress` or `.progress-log.md`; both are local working-state artifacts.
+5. Run `./scripts/progress.sh` from the harness root. It refreshes and displays the current repository status and lists the per-repository progress files; it does not create a consolidated snapshot.
+6. Commit the relevant `progress/<repository-name>.md` file together with the root-repository workflow changes when the project convention requires tracked progress history.
 
 ## Entry quality rules
 
@@ -47,6 +47,8 @@ Use one entry per repository and commit. Keep each entry short enough to scan in
 - 验证结果：...
 - 风险与后续：...
 ```
+
+Each repository file starts with a repository heading, for example `progress/v-ai-platform.md`, followed by its chronological entries. Do not create `.progress`, `.progress.prev`, or `.progress-log.md`.
 
 ## Resources
 

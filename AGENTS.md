@@ -15,6 +15,6 @@
 
 5. 最终回复中说明修改内容、验证结果、commit，以及 progress 已更新。
 
-`.progress` 和 `.progress-log.md` 是本地工作状态文件，默认被 `.gitignore` 忽略，不要提交它们，除非用户明确要求。
+进度记录保存在 `progress/<仓库名>.md`，按仓库分别维护。不要生成 `.progress`、`.progress.prev` 或 `.progress-log.md`。
 
 如果一次任务同时修改多个子项目，分别提交各子项目后，再统一执行一次根仓库的 `./scripts/progress.sh`。

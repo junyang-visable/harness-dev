@@ -4,8 +4,3 @@
 node_modules/
 .env
 .env.local
-
-# progress snapshots (personal working state)
-.progress
-.progress.prev
-.progress-log.md
