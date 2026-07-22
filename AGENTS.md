@@ -15,6 +15,6 @@
 
 5. 最终回复中说明修改内容、验证结果、commit，以及 progress 已更新。
 
-进度记录保存在 `progress/<仓库名>.md`，按仓库分别维护。不要生成 `.progress`、`.progress.prev` 或 `.progress-log.md`。
+进度记录保存在 `.progress/<仓库名>.md`，按仓库分别维护；`.progress/` 是被 Git 忽略的本地工作目录。不要生成 `.progress` 文件、`.progress.prev` 或 `.progress-log.md`。
 
 如果一次任务同时修改多个子项目，分别提交各子项目后，再统一执行一次根仓库的 `./scripts/progress.sh`。

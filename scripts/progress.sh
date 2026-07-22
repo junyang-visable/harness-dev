@@ -4,7 +4,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-PROGRESS_DIR="$ROOT_DIR/progress"
+PROGRESS_DIR="$ROOT_DIR/.progress"
 mkdir -p "$PROGRESS_DIR"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
@@ -55,5 +55,5 @@ else
 fi
 echo ""
 echo "# ─────────────────────────────────────"
-echo "# Progress details are stored in progress/<repository>.md"
+echo "# Progress details are stored in .progress/<repository>.md"
 echo "✅ progress 状态已刷新 ($TIMESTAMP)"
