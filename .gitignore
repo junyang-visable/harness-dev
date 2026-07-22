@@ -8,3 +8,4 @@ node_modules/
 # progress snapshots (personal working state)
 .progress
 .progress.prev
+.progress-log.md

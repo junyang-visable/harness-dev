@@ -9,6 +9,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PROGRESS_FILE="$ROOT_DIR/.progress"
 PREV_FILE="$ROOT_DIR/.progress.prev"
+BUSINESS_LOG="$ROOT_DIR/.progress-log.md"
 
 if [[ "${1:-}" == "--diff" ]]; then
   if [[ ! -f "$PROGRESS_FILE" ]]; then
@@ -89,6 +90,15 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
     fi
     echo ""
   '
+
+  echo "## Business Changes"
+  echo ""
+  if [[ -f "$BUSINESS_LOG" ]]; then
+    cat "$BUSINESS_LOG"
+  else
+    echo "暂无业务功能变化记录。"
+  fi
+  echo ""
 
   echo "# ─────────────────────────────────────"
   echo "# Tip: run ./scripts/progress.sh --diff to compare with previous snapshot"

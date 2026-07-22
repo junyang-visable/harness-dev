@@ -1,0 +1,4 @@
+interface:
+  display_name: "Track Development Progress"
+  short_description: "Record business and technical changes per repository"
+  default_prompt: "Use $track-development-progress to record the business and technical changes from this development task."
